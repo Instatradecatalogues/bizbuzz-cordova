@@ -163,10 +163,33 @@ public class ExifHelper {
         this.outFile.saveAttributes();
     }
 
+    /**
+     * @author sushil
+     * Rewritten to remove a bug
+     * @return
+     */
     public int getOrientation() {
         int o = Integer.parseInt(this.orientation);
-
-        if (o == ExifInterface.ORIENTATION_NORMAL) {
+        int rotate = 0;
+        switch(o){
+        case ExifInterface.ORIENTATION_NORMAL:
+        	rotate = 0;
+        	break;
+        case ExifInterface.ORIENTATION_ROTATE_90:
+        	rotate = 90;
+        	break;
+        case ExifInterface.ORIENTATION_ROTATE_180:
+        	rotate = 180;
+        	break;
+        case ExifInterface.ORIENTATION_ROTATE_270:
+        	rotate = 270;
+        	break;
+        default:
+        	rotate = 0;
+        	break;
+        }
+        return rotate;
+        /*if (o == ExifInterface.ORIENTATION_NORMAL) {
             return 0;
         } else if (o == ExifInterface.ORIENTATION_ROTATE_90) {
             return 90;
@@ -176,7 +199,7 @@ public class ExifHelper {
             return 270;
         } else {
             return 0;
-        }
+        }*/
     }
 
     public void resetOrientation() {
