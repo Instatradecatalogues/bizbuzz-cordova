@@ -1,4 +1,16 @@
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/ant-build/classes.dex : \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/ant-build/classes/org/apache/cordova/camera/FileHelper.class \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/ant-build/classes/org/apache/cordova/camera/ExifHelper.class \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/ant-build/classes/org/apache/cordova/camera/CameraLauncher.class \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/ant-build/classes/org/apache/cordova/contacts/ContactAccessorSdk5.class \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/ant-build/classes/org/apache/cordova/contacts/ContactAccessor$WhereOptions.class \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/ant-build/classes/org/apache/cordova/contacts/ContactInfoDTO.class \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/ant-build/classes/org/apache/cordova/contacts/ContactManager$1.class \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/ant-build/classes/org/apache/cordova/contacts/ContactAccessor.class \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/ant-build/classes/org/apache/cordova/contacts/ContactManager.class \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/ant-build/classes/org/apache/cordova/contacts/ContactManager$4.class \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/ant-build/classes/org/apache/cordova/contacts/ContactManager$3.class \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/ant-build/classes/org/apache/cordova/contacts/ContactManager$2.class \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/ant-build/classes/com/bizbuzz/cordova/Frotal/R$drawable.class \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/ant-build/classes/com/bizbuzz/cordova/Frotal/R$attr.class \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/ant-build/classes/com/bizbuzz/cordova/Frotal/Bizbuzz.class \
