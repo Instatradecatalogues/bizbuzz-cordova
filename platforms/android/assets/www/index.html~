@@ -23,10 +23,51 @@
         <meta name="format-detection" content="telephone=no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+
 		<script>
-			window.onload=function(e){
-				window.location="http://192.168.1.7:8080/bizbuzz/login";
+			document.addEventListener("deviceready", onDeviceReady, false);
+
+			// device APIs are available
+			//
+			function onDeviceReady() {
+				var isApplicationStart = window.sessionStorage.getItem("com.bizbuzz.deviceLocalStorage.firstVisit");
+				if(isApplicationStart == null){
+					window.sessionStorage.setItem("com.bizbuzz.deviceLocalStorage.firstVisit", "false");
+				}
+				else{
+					window.history.back();
+					window.history.back();					
+					return;
+				}
+				navigator.splashscreen.show();
+				var username = window.localStorage.getItem("com.bizbuzz.deviceLocalStorage.username");
+				var password = window.localStorage.getItem("com.bizbuzz.deviceLocalStorage.password");
+				var url = window.localStorage.getItem("com.bizbuzz.deviceLocalStorage.url");
+				if(url == null){
+					url = "http://www.cargobolt.com/bizbuzz";
+					window.localStorage.setItem("com.bizbuzz.deviceLocalStorage.url", url);
+				}
+				if(username != null && password != null){
+//					window.location=url+"/login"
+					var form = document.createElement("form");
+					var inputUser = document.createElement("input");
+					inputUser.name = "j_username";
+					inputUser.value = username;
+					var inputPass = document.createElement("input");
+					inputPass.name = "j_password";
+					inputPass.value = password;
+					form.action = url+"/j_spring_security_check";
+					form.method = "POST";
+					form.appendChild(inputUser);
+					form.appendChild(inputPass);
+					form.submit();
+				}
+				else{
+					window.location= url+"/register/personregistration"
+				}
 			}
+
 		</script>
 
     </head>
