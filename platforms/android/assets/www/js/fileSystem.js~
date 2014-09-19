@@ -1,0 +1,17 @@
+var MobileFileSystem = function(){
+	var fs;
+	
+	function getFS(context){
+		function successFS(fs){
+			this.fs = fs;
+		}
+		function failFS(){
+			alert("Failed to load file system.");
+		}
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, successFS, failFS);
+	}
+	
+	function initializeRootFS(){
+		
+	}	
+}

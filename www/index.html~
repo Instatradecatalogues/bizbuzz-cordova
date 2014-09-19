@@ -23,29 +23,80 @@
         <meta name="format-detection" content="telephone=no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <script type="text/javascript" src="js/MobileFileSystem.js"></script>
         <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-
 		<script>
 			document.addEventListener("deviceready", onDeviceReady, false);
-
-			// device APIs are available
-			//
-			function onDeviceReady() {
+			
+			function fail(error){
+			}
+			function onwriteend(){
+			}
+			
+			function onDataRead(args){
+				var data = args.data;
+				if(data == ""){
+					var obj = new Object();
+					obj.url = "http://192.168.1.34:8080/bizbuzz";
+					var objString = JSON.stringify(obj);
+					MobileFileSystem.writeInAFileShortcut({path: ["config"], fileName: "properties.txt", fail:fail, data: objString, onwriteend: onwriteend});
+					window.location = obj.url+"/register/personregistration";
+				}
+				else{
+					var configObj = JSON.parse(data);
+					if(configObj.username !== undefined && configObj.password !== undefined){
+						var form = document.createElement("form");
+						var inputUser = document.createElement("input");
+						inputUser.name = "j_username";
+						inputUser.value = configObj.username;
+						var inputPass = document.createElement("input");
+						inputPass.name = "j_password";
+						inputPass.value = configObj.password;
+						form.action = configObj.url+"/j_spring_security_check";
+						form.method = "POST";
+						form.appendChild(inputUser);
+						form.appendChild(inputPass);
+						form.submit();
+					}
+					else{
+						window.location = configObj.url+"/register/personregistration";
+					}
+				}
+			}
+			
+			function onDeviceReady(){
+				alert("in");
+				
 				var isApplicationStart = window.sessionStorage.getItem("com.bizbuzz.deviceLocalStorage.firstVisit");
 				if(isApplicationStart == null){
 					window.sessionStorage.setItem("com.bizbuzz.deviceLocalStorage.firstVisit", "false");
 				}
 				else{
-					window.history.back();
-					window.history.back();					
+					navigator.app.exitApp();					
 					return;
 				}
+				
+				MobileFileSystem.readAFileAsTextShortcut({path: ["config"], fileName: "properties.txt", success: onDataRead, fail:fail});
+			}
+			
+			// device APIs are available
+			//
+			/*function onDeviceReady() {
+				var isApplicationStart = window.sessionStorage.getItem("com.bizbuzz.deviceLocalStorage.firstVisit");
+				if(isApplicationStart == null){
+					window.sessionStorage.setItem("com.bizbuzz.deviceLocalStorage.firstVisit", "false");
+				}
+				else{
+					navigator.app.exitApp();					
+					return;
+				}
+				alert("test");
 				navigator.splashscreen.show();
 				var username = window.localStorage.getItem("com.bizbuzz.deviceLocalStorage.username");
 				var password = window.localStorage.getItem("com.bizbuzz.deviceLocalStorage.password");
 				var url = window.localStorage.getItem("com.bizbuzz.deviceLocalStorage.url");
 				if(url == null){
-					url = "http://www.cargobolt.com/bizbuzz";
+					url = "http://10.1.21.73:8080/bizbuzz";
 					window.localStorage.setItem("com.bizbuzz.deviceLocalStorage.url", url);
 				}
 				if(username != null && password != null){
@@ -66,7 +117,7 @@
 				else{
 					window.location= url+"/register/personregistration"
 				}
-			}
+			}*/
 
 		</script>
 

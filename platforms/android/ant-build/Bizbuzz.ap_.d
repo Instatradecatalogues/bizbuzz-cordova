@@ -68,12 +68,15 @@
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/cordova.js \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/css \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/js/MobileFileSystemTest.js \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/js/MobileFileSystem.js \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/js/index.js \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/img/logo.png \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.media-capture \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.dialogs \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.file \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.device \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.file-transfer \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.battery-status \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.inappbrowser \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.camera \
@@ -119,6 +122,9 @@
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.file/www/android/FileSystem.js \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.device/www \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.device/www/device.js \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.file-transfer/www \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.file-transfer/www/FileTransferError.js \
+/home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.file-transfer/www/FileTransfer.js \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.battery-status/www \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.battery-status/www/battery.js \
 /home/sushil/workspace/bizbuzz/cordova/platforms/android/assets/www/plugins/org.apache.cordova.inappbrowser/www \
