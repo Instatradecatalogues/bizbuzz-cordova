@@ -27,20 +27,19 @@
         <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 		<script>
 			document.addEventListener("deviceready", onDeviceReady, false);
-			
+			var obj = new Object();
 			function fail(error){
 			}
 			function onwriteend(){
+				window.location = obj.url+"/register/personregistration";
 			}
 			
 			function onDataRead(args){
 				var data = args.data;
 				if(data == ""){
-					var obj = new Object();
-					obj.url = "http://192.168.1.34:8080/bizbuzz";
+					obj.url = "http://www.instatrade.co";
 					var objString = JSON.stringify(obj);
 					MobileFileSystem.writeInAFileShortcut({path: ["config"], fileName: "properties.txt", fail:fail, data: objString, onwriteend: onwriteend});
-					window.location = obj.url+"/register/personregistration";
 				}
 				else{
 					var configObj = JSON.parse(data);
@@ -65,11 +64,9 @@
 			}
 			
 			function onDeviceReady(){
-				alert("in");
-				
-				var isApplicationStart = window.sessionStorage.getItem("com.bizbuzz.deviceLocalStorage.firstVisit");
+				var isApplicationStart = window.sessionStorage.getItem("com.bizbuzz.instatrade.deviceLocalStorage.firstVisit");
 				if(isApplicationStart == null){
-					window.sessionStorage.setItem("com.bizbuzz.deviceLocalStorage.firstVisit", "false");
+					window.sessionStorage.setItem("com.bizbuzz.instatrade.deviceLocalStorage.firstVisit", "false");
 				}
 				else{
 					navigator.app.exitApp();					
@@ -78,46 +75,7 @@
 				
 				MobileFileSystem.readAFileAsTextShortcut({path: ["config"], fileName: "properties.txt", success: onDataRead, fail:fail});
 			}
-			
-			// device APIs are available
-			//
-			/*function onDeviceReady() {
-				var isApplicationStart = window.sessionStorage.getItem("com.bizbuzz.deviceLocalStorage.firstVisit");
-				if(isApplicationStart == null){
-					window.sessionStorage.setItem("com.bizbuzz.deviceLocalStorage.firstVisit", "false");
-				}
-				else{
-					navigator.app.exitApp();					
-					return;
-				}
-				alert("test");
-				navigator.splashscreen.show();
-				var username = window.localStorage.getItem("com.bizbuzz.deviceLocalStorage.username");
-				var password = window.localStorage.getItem("com.bizbuzz.deviceLocalStorage.password");
-				var url = window.localStorage.getItem("com.bizbuzz.deviceLocalStorage.url");
-				if(url == null){
-					url = "http://10.1.21.73:8080/bizbuzz";
-					window.localStorage.setItem("com.bizbuzz.deviceLocalStorage.url", url);
-				}
-				if(username != null && password != null){
-//					window.location=url+"/login"
-					var form = document.createElement("form");
-					var inputUser = document.createElement("input");
-					inputUser.name = "j_username";
-					inputUser.value = username;
-					var inputPass = document.createElement("input");
-					inputPass.name = "j_password";
-					inputPass.value = password;
-					form.action = url+"/j_spring_security_check";
-					form.method = "POST";
-					form.appendChild(inputUser);
-					form.appendChild(inputPass);
-					form.submit();
-				}
-				else{
-					window.location= url+"/register/personregistration"
-				}
-			}*/
+
 
 		</script>
 

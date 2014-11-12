@@ -1,3 +1,3 @@
 # view AndroidManifest.xml #generated:6
--keep class com.bizbuzz.cordova.Frotal.Bizbuzz { <init>(...); }
+-keep class com.bizbuzz.instatrade.InstaTrade { <init>(...); }
 

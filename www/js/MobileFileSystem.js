@@ -2,7 +2,7 @@ function MFSConstructor(){
 	this.fs = undefined;
 	this.rootDirEntry = undefined;
 	this.debug = true;
-	this.rootDirName = "Bizbuzz";
+	this.rootDirName = "InstaTrade";
 }
 
 /**
