@@ -19,14 +19,50 @@
 
 package com.bizbuzz.instatrade;
 
-import android.os.Bundle;
-import org.apache.cordova.*;
+import com.google.android.gcm.GCMRegistrar;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.ConnectionResult;
+
+import  java.io.OutputStream;
+import  java.io.IOException;
+import java.io.FileNotFoundException;
+import  java.io.File;
+import  java.io.FileReader;
+import  java.io.BufferedReader;
+import  java.net.HttpURLConnection;
+import  java.net.MalformedURLException;
+import  java.net.URL;
+import  java.util.Map;
+import  java.util.HashMap;
+import  java.util.Map.Entry;
+import  java.util.Iterator;
+import  java.util.concurrent.atomic.AtomicInteger;
+
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.DialogInterface;
+import android.widget.Toast;
+import android.widget.TextView;
 import android.net.Uri;
-import android.os.Build;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Environment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.util.Log;
-import android.content.pm.ApplicationInfo;
-import android.webkit.WebView;
+import android.text.TextUtils;
+import org.json.JSONObject;
+import org.json.JSONException;
+import org.apache.cordova.*;
 
 public class InstaTrade extends CordovaActivity 
 {
