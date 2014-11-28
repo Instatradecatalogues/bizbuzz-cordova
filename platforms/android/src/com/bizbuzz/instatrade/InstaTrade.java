@@ -38,6 +38,10 @@ import  java.util.HashMap;
 import  java.util.Map.Entry;
 import  java.util.Iterator;
 import  java.util.concurrent.atomic.AtomicInteger;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 60f26bcd0b970a0f3d1c953a75ce386e23e204d1
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -180,6 +184,142 @@ private SharedPreferences getGCMPreferences(Context context) {
     // This sample app persists the registration ID in shared preferences, but
     // how you store the regID in your app is up to you.
     return getSharedPreferences(InstaTrade.class.getSimpleName(),Context.MODE_PRIVATE);
+<<<<<<< HEAD
+=======
+}
+
+private boolean checkPlayServices() {
+    int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+    if (resultCode != ConnectionResult.SUCCESS) {
+        if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+            GooglePlayServicesUtil.getErrorDialog(resultCode, this,
+                    PLAY_SERVICES_RESOLUTION_REQUEST).show();
+        } else {
+            Log.i(TAG, "This device is not supported.");
+            finish();
+        }
+        return false;
+    }
+    return true;
+}
+
+private static int getAppVersion(Context context) {
+    try {
+        PackageInfo packageInfo = context.getPackageManager()
+                .getPackageInfo(context.getPackageName(), 0);
+        return packageInfo.versionCode;
+    } catch (NameNotFoundException e) {
+        // should never happen
+        throw new RuntimeException("Could not get package name: " + e);
+    }
+}
+
+private void registerInBackground() {
+    new AsyncTask<Void, Void, String>() {
+        @Override
+        protected String doInBackground(Void... params) {
+            String msg = "";
+            try {
+                if (gcm == null) {
+                    gcm = GoogleCloudMessaging.getInstance(context);
+                }
+                regid = gcm.register(SENDER_ID);
+                msg = "Device registered, registration ID=" + regid;
+                
+				  // Persist the regID - no need to register again.
+                storeRegistrationId(context, regid);
+                // You should send the registration ID to your server over HTTP,
+                // so it can use GCM/HTTP or CCS to send messages to your app.
+                // The request to your server should be authenticated if your app
+                // is using accounts.   To the InstaTrade server..
+					 Log.i(TAG, "################### Registration Id " +regid);
+	              String serverUrl = instaUrl+"/register/deviceregistration";  
+                  Map<String, String> regparams = new HashMap<String, String>();
+                  regparams.put("regId", regid);
+				  regparams.put("username",username);
+                  sendRegistrationIdToBackend(serverUrl, regparams);
+    
+	//	sendEmail(regid);
+                // For this demo: we don't need to send it because the device
+                // will send upstream messages to a server that echo back the
+                // message using the 'from' address in the message.
+				
+            } catch (IOException ex) {
+                msg = "Error :" + ex.getMessage();
+                // If there is an error, don't just keep trying to register.
+                // Require the user to click a button again, or perform
+                // exponential back-off.
+            }
+            return msg;
+        }
+		
+		 @Override
+        protected void onPostExecute(String msg) {
+            mDisplay.append(msg + "\n");
+        }
+    }.execute(null, null, null);
+
+}
+
+private void storeRegistrationId(Context context, String regId) {
+    final SharedPreferences prefs = getGCMPreferences(context);
+    int appVersion = getAppVersion(context);
+    Log.i(TAG, "Saving regId on app version " + appVersion);
+    SharedPreferences.Editor editor = prefs.edit();
+    editor.putString(PROPERTY_REG_ID, regId);
+    editor.putInt(PROPERTY_APP_VERSION, appVersion);
+    editor.commit();
+}
+
+
+private void sendRegistrationIdToBackend(String endpoint, Map<String, String> regparams)    throws IOException{
+    // Your implementation here.
+	 URL url;
+        try {
+            url = new URL(endpoint);
+        } catch (MalformedURLException e) {
+            throw new IllegalArgumentException("invalid url: " + endpoint);
+        }
+        StringBuilder bodyBuilder = new StringBuilder();
+        Iterator<Entry<String, String>> iterator = regparams.entrySet().iterator();
+        // constructs the POST body using the parameters
+        while (iterator.hasNext()) {
+            Entry<String, String> param = iterator.next();
+            bodyBuilder.append(param.getKey()).append('=')
+                    .append(param.getValue());
+					
+            if (iterator.hasNext()) {
+                bodyBuilder.append('&');
+            }
+        }
+        String body = bodyBuilder.toString();
+        Log.v(TAG, "Posting '" + body + "' to " + url);
+        byte[] bytes = body.getBytes();
+        HttpURLConnection conn = null;
+        try {
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setUseCaches(false);
+            conn.setFixedLengthStreamingMode(bytes.length);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded;charset=UTF-8");
+            // post the request
+            OutputStream out = conn.getOutputStream();
+            out.write(bytes);
+            out.close();
+            // handle the response
+            int status = conn.getResponseCode();
+            if (status != 200) {
+              throw new IOException("Post failed with error code " + status);
+            }
+        } finally {
+            if (conn != null) {
+                conn.disconnect();
+            }
+        }
+} 
+>>>>>>> 60f26bcd0b970a0f3d1c953a75ce386e23e204d1
 }
 
 private boolean checkPlayServices() {
